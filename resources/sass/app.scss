@@ -1,0 +1,342 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+$fontGray: #ccc;
+$borderGray : #ddd;
+$bgGray: #eee;
+
+$commonWhite: #fff;
+$commonPadding: 10px 15px;
+$commonRadius: 5px;
+$commonBorder: 1px solid $borderGray;
+$commonFontColor: #333333;
+$fontAwesome: "Font Awesome 5 Free";
+$fontAwesomeSize: 20px;
+
+$mainColor: #321050;
+$subColor: #462761;
+$resetColor: inherit;
+@mixin bgOptions() {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/*reset css*/
+button { color: $resetColor; }
+button:focus, button:active { color: inherit; }
+ul { margin: 0; padding: 0; }
+li { margin: 0; padding: 0; list-style-type: none; }
+label { margin: 0; }
+
+/*common*/
+.clearfix { display: block; content: ''; clear: both; }
+a { color: inherit; }
+.bold { font-weight: bold; }
+.message {
+    padding: $commonPadding;
+    ul { margin-bottom: 0; }
+    .flash_message { @extend .alert; margin-bottom: 0; }
+}
+body { font-weight: 300; color: $commonFontColor; }
+
+header {
+    $mainHeaderHeight: 30px;
+    #main-header {
+        width: 100%;
+        padding: $commonPadding;
+        text-align: center;
+        background-color: $mainColor;
+        font-family: 'Raleway', 'Noto Sans JP', sans-serif;
+    }
+
+    #drawer { display: inline-block; float: left; text-align: left; }
+    .drawer-hidden { display: none; }
+    #drawer-icon { display: inline-block; width: $mainHeaderHeight; height: $mainHeaderHeight; margin: 0; border-radius: 50%; @include bgOptions(); }
+    #drawer-bg { display: none; position: fixed; z-index: 99; top: 0; left: 0; width: 100%; height: 100%; background: rgb(50, 16, 80); opacity: 0; transition: .3s ease-in-out; }
+    #drawer-contents { overflow: auto; position: fixed; top: 0; left: 0; z-index: 9999; width: 90%; max-width: 330px; height: 100%; background: $commonWhite; transition: .3s ease-in-out; -webkit-transform: translateX(-105%); transform: translateX(-105%); }
+    #drawer-input:checked ~ #drawer-bg { display: block; opacity: .3; }
+    #drawer-input:checked ~ #drawer-contents { -webkit-transform: translateX(0%); transform: translateX(0%); box-shadow: 6px 0 25px rgba(0,0,0,.15); }
+
+    #drawer-contents {
+        font-weight: lighter;
+
+        .drawer-section { border-bottom : $commonBorder;  }
+        #drawer-header {
+            #drawer-header-wrapper { padding: 15px 30px; }
+            .profile-img { margin-bottom: 5px; display: inline-block; width: 50px; height: 50px; border-radius: 50%; @include bgOptions(); }
+            .profile-name {
+                margin-bottom: 10px;
+
+                .profile-kana { font-size: 20px; font-weight: bold; letter-spacing: 1px; }
+                .account-id { font-size: 14px; color: $fontGray; }
+            }
+            .friends {
+                display: flex;
+
+                .follows { margin-right: 10px; }
+            }
+        }
+
+        #drawer-main {
+            #profile-info { margin: 0; padding: 5px 0; }
+            #profile-info li a { display: block;  color: $commonFontColor; height: 50px; line-height: 20px; padding: 15px 0 15px 70px; box-sizing: border-box; position: relative; }
+            #profile-info li a::after { display: block; position: absolute; top: 50%; left: 30px; transform: translateY(-50%); width: $fontAwesomeSize; height: $fontAwesomeSize; text-align: center; font-family: $fontAwesome; font-size: $fontAwesomeSize; }
+            .profile a::after { content: '\f007'; }
+            .post-lists a::after { content: '\f022'; }
+            .bookmark a::after { content: '\f02e'; }
+        }
+        #drawer-footer {
+            #settings { margin: 0; padding: 5px 0; }
+            #settings li { height: 50px; line-height: 20px; padding: 15px 0 15px 70px; box-sizing: border-box; position: relative; }
+            #settings li::after { display: block; position: absolute; top: 50%; left: 30px; transform: translateY(-50%); width: $fontAwesomeSize; height: $fontAwesomeSize; text-align: center; font-family: $fontAwesome; font-size: $fontAwesomeSize; }
+            .setting::after { content: '\f013'; font-weight: 900; }
+            .help::after { content: '\f059'; }
+        }
+    }
+
+    .logo {
+        display: inline-block; font-size: 18px; line-height: $mainHeaderHeight; position: relative;
+        a { color: $commonWhite; }
+    }
+
+    .searchBtn { width: 15px; height: 15px; position: relative; float: right; margin: 7px 5px 0 0; }
+    .searchBtn::before, .searchBtn::after { display: inline-block; content: ''; position: absolute; }
+    .searchBtn::before { width: 100%; height: 100%; border: 2px solid $commonWhite; border-radius: 50%; left: 0; top: 0; }
+    .searchBtn::after { width: 40%; height: 2px; background-color: $commonWhite; transform: rotate(45deg); left: 80%; top: 95%; }
+
+    .auth {
+        display: none; position: absolute; top: 50%; right: 0; transform: translateY(-50%);
+        .nav-item { display: inline-block; }
+    }
+
+    $profile-header: '#profile-header';
+    $headerHeight: 50px;
+    #{$profile-header} {
+        &-banner {
+            width: 100%; height: $headerHeight; font-size: 18px;
+
+            .back {
+                width: $headerHeight; height: $headerHeight; text-align: center; display: inline-block; line-height: $headerHeight;
+
+                a { width: 100%; height: 100%; display: block; }
+            }
+            .profile-name { display: inline-block; }
+            .submit { display: inline-block; font-size: 14px; padding: 3px 15px; color: $commonWhite; background-color: $mainColor; border-radius: 30px; }
+        }
+        &-photo { width: 100%; height: 120px; @include bgOptions(); }
+        &-info {
+            position: relative;
+            width: 100%;
+            padding: 10px 15px;
+            box-sizing: border-box;
+
+            #edit-profile {
+                position: absolute; top: 10px; right: 15px;
+                .edit-profile-btn { font-size: 14px; padding: 8px 15px; border: 1px solid $subColor; color: $subColor; background-color: $commonWhite; border-radius: 25px; }
+            }
+            #{$profile-header}-icon { width: 80px; height: 80px; border-radius: 50%; border: 2px solid $commonWhite; margin-top: -40px; @include bgOptions(); }
+            #{$profile-header}-kana { font-size: 18px; font-weight: bold; }
+            #{$profile-header}-account-id { font-size: 14px; color: $fontGray; margin-bottom: 5px; }
+            #{$profile-header}-comment { font-size: 16px; margin-bottom: 5px; }
+            #{$profile-header}-friends {
+                display: flex;
+                .follows { margin-right: 20px; }
+                .followers {}
+            }
+        }
+        #{$profile-header}-nav {
+            #profile-tabs { display: flex; margin: 0; }
+            #profile-tabs li {
+                a { display: block; padding: 0 15px; height: $headerHeight; line-height: $headerHeight; color: $commonFontColor; }
+            }
+            .selected-nav { box-sizing: border-box; border-bottom: 2px solid $mainColor; }
+        }
+    }
+    #{$profile-header}.edit {
+        padding-top: $headerHeight;
+        #{$profile-header}-banner {
+            position: fixed; top: 0; border-bottom: 1px solid $borderGray;
+            .submit { position: absolute; top: 50%; right: 10px; transform: translateY(-50%); }
+        }
+        #{$profile-header}-photo, #{$profile-header}-icon  { border: 4px solid $commonWhite; position: relative; }
+        #{$profile-header}-photo::before, #{$profile-header}-icon::before { display: block; content: ''; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); }
+        #{$profile-header}-icon::before { border-radius: 50%; }
+        #{$profile-header}-photo::after, #{$profile-header}-icon::after { display: inline-block; content: "\f302"; color: $commonWhite; font-family: $fontAwesome; font-size: $fontAwesomeSize; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; }
+        .edit-image { display: block; width: 100%; height: 100%; position: absolute; top: 0; left: 0; cursor: pointer; }
+        .edit-image input { display: none; }
+    }
+}
+nav {
+    width: 100%; background-color: $subColor;
+
+    a { color: $commonWhite; }
+    .menu { display: flex; color: $commonWhite; font-size: 14px; height: 40px; margin: 0; padding: 0 0 0 20px; }
+    .menu a { line-height: 40px; position: relative; list-style-type: none; margin-right: 0px; }
+    .menu a:first-child::after { display: inline-block; content: ''; position: absolute; width: 100%; height: 4px; background-color: $commonWhite; bottom: 0; border-bottom: $commonBorder; }
+    .menu a:not(:first-child) { color: #ddd; }
+    .menu a li { padding: 0 10px; text-align: center; }
+}
+
+/*main*/
+main {
+    font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+    .wrapper { padding: 0; position: relative; }
+
+    /*top*/
+    .post-lists { padding: 10px 0 0 0; background-color: #f5f5f5; }
+    .post-lists > li { width: 100%; border-bottom: $commonBorder; margin-bottom: 10px; list-style-type: none; background-color: $commonWhite; }
+    .content { padding: $commonPadding; }
+
+    .post-lists-header {
+        .profile { position: relative; height: 35px; }
+        .profile-icon { width: 35px; height: 35px; display: inline-block; margin-right: 5px; border-radius: 50%; overflow: hidden; }
+        .profile-icon img { width: auto; height: 100%; }
+        .profile-name { font-size: 14px; display: inline-block; position: absolute; left: 45px; top: 50%; transform: translateY(-50%); }
+    }
+
+    .post-lists-contents { padding: 10px 0 15px 0; }
+    .caption { font-size: 16px; font-weight: 400; line-height: 1.8; letter-spacing: 0.5px; }
+    .reference { font-size: 12px; color: #999; margin-top: 5px; }
+
+    .post-lists-comment {
+        width: 100%; border-top: $commonBorder; padding: 15px 0 5px 0; display: flex;
+        .profile { height: 30px; }
+        .profile-icon { width: 25px; height: 25px; display: inline-block; margin-right: 5px; border-radius: 50%; overflow: hidden; }
+        .profile-icon img { width: auto; height: 100%; }
+        .comment { font-size: 12px; margin-left: 5px; line-height: 1.8; }
+    }
+
+    .post-lists-bottom { }
+    .favorite { @extend .reference; }
+
+    .post-btn { width: 50px; height: 50px; border-radius: 50%; background-color: $mainColor; color: $commonWhite; font-size: 50px; line-height: 50px; text-align: center; position: fixed; bottom: 10px; right: 10px; }
+
+
+    /*post*/
+    .post {
+        padding: $commonPadding;
+
+        .post__textarea--sp {
+            border: $commonBorder;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        .comment {
+            border-radius: $commonRadius;
+        }
+
+        .toolbar {
+            &-lists li {
+                display: inline-block;
+                margin-right: 10px;
+            }
+
+            &-images {
+                position: relative;
+
+                .upload__btn--images {
+                    display: none;
+                }
+
+                .upload__label--images {
+                    display: inline-block;
+                    width: 30px;
+                    height: 30px;
+                    background-color: $mainColor;
+                    color: $commonWhite;
+                    border-radius: 10px;
+                    text-align: center;
+                    font-size: 30px;
+                    line-height: 30px;
+                }
+            }
+
+            &-news {
+                .upload__label--news {
+                    @extend .btn;
+                    background-color: $mainColor;
+                    color: $commonWhite;
+                    font-size: 20px;
+                    padding: 2px 1px;
+                    border-radius: $commonRadius;
+                }
+            }
+        }
+
+        .news {
+            margin-top: 20px;
+
+            &-lists {
+                li {
+                    margin-bottom: 5px;
+
+                    input.upload__input--news {
+                        height: 30px;
+                        border: $commonBorder;
+                        border-radius: 5px;
+                        width: 90%;
+                    }
+
+                    .cancelBtn {
+                        width: 30px;
+                        height: 30px;
+                        background-color: $bgGray;
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+
+        .preview-image {
+            display: inline-block;
+            width: 45%;
+            height: 90px;
+            margin: 0 10px 10px 0;
+            padding: 0;
+            border-radius: 5px;
+            overflow: hidden;
+            @include bgOptions();
+
+            img {
+                width: 100%;
+            }
+        }
+
+        div.submit {
+            text-align: center;
+        }
+
+        input[type="submit"] {
+            width: 50%;
+            height: 50px;
+            text-align: center;
+            background-color: $mainColor;
+            color: $commonWhite;
+            border-radius: $commonRadius;
+        }
+    }
+
+    #profile {
+        $profileBorderRadius: 3px;
+        .profile-items {
+            margin: 0; padding: $commonPadding;
+
+            li { margin-bottom: 20px; padding: 10px; background-color: $bgGray; border-radius: $profileBorderRadius; }
+            input, textarea, label { width: 100%; border: none; outline: 0; box-sizing: border-box; margin: 0; background-color: $bgGray; }
+            textarea { height: 3em; resize: none; }
+            input[name='birthday'] { display: inline-block; }
+            .birthyear { width: 3.5em; }
+            .birthmonth, .birthday { width: 2em; }
+        }
+    }
+}
+
