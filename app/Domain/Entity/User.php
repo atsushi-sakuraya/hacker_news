@@ -48,5 +48,10 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'birth_year' => 'integer',
+        'birth_month' => 'integer',
+        'birth_day' => 'integer',
+        'follow' => 'integer',
+        'follower' => 'integer',
     ];
 }

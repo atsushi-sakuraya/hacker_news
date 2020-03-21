@@ -20,13 +20,15 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(UserRepository::class, function ($app) {
-            return new UserRepositoryImplement($app->make(User::class));
+            return new UserRepositoryImplement(
+                $app->make(User::class)
+            );
         });
 
-        $this->app->bind('UserService', function ($app) {
+        $this->app->bind(UserService::class, function ($app) {
             return new UserService(
-                $app->make('App\Domain\Repositories\UserRepository'),
-                $app->make('App\Domain\Services\ImageService')
+                $app->make(UserRepository::class),
+                $app->make(ImageService::class)
             );
         });
     }
@@ -38,6 +40,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \Illuminate\Support\Facades\Schema::defaultStringLength(191);
     }
 }

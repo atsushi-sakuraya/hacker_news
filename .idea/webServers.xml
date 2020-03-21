@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="c722737f-91a8-4618-a0ec-df0a507f0c11" name="vagant" url="http://localhost">
+      <webServer id="c722737f-91a8-4618-a0ec-df0a507f0c11" name="vagant" url="http://192.168.33.10/">
         <fileTransfer host="localhost" port="2222" privateKey="$USER_HOME$/project/vagrant/centos72/.vagrant/machines/default/virtualbox/private_key" rootFolder="/var/www/hacker_news" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />

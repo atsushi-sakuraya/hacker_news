@@ -49,12 +49,6 @@ class UserService implements UserServiceInterface
         return $user;
     }
 
-    public function testinaba()
-    {
-
-    }
-
-
     /**
      * 画像の相対パスを絶対パスに変換
      * @param User $user
