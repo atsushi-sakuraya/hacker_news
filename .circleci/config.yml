@@ -1,13 +1,17 @@
-version: 2.1
+version: 2
 jobs:
   build:
     docker:
       - image: circleci/php:7.3-node-browsers
       - image: circleci/mariadb:10.4
-      - environment:
-          - DB_CONNECTION: circleci_test
+    environment:
+      - DB_CONNECTION: circleci_test
+    working_directory: ~/ci-demo
     steps:
-      - checkout # check out the code in the project directory
+      - checkout
+      - run:
+          name: Update apt-get
+          command: sudo apt-get update
       - run:
           name: Docker php extensions install
           command: sudo docker-php-ext-install pdo_mysql
@@ -25,4 +29,3 @@ jobs:
       - run:
           name: Run PHPUnit
           command: vendor/bin/phpunit
-
