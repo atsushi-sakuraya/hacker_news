@@ -10,13 +10,13 @@
             </div>
             <div id="profile-header-photo" style="background-image: url('{{ url($user->profile_header_photo) }}');">
                 <label class="edit-image">
-                    {{Form::file('profile_photo[header]', ['class' => 'edit-photo', 'id' => 'banner-photo', 'accept' => 'image/*', 'form' => 'profile-form'])}}
+                    {{Form::file('profile_photo[profile_header_photo]', ['class' => 'edit-photo', 'id' => 'banner-photo', 'accept' => 'image/*', 'form' => 'profile-form'])}}
                 </label>
             </div>
             <div id="profile-header-info">
                 <div id="profile-header-icon" style="background-image: url('{{ url($user->profile_icon_photo) }}');">
                     <label class="edit-image">
-                        {{Form::file('profile_photo[icon]', ['class' => 'edit-icon', 'id' => 'icon-photo', 'accept' => 'image/*', 'form' => 'profile-form'])}}
+                        {{Form::file('profile_photo[profile_icon_photo]', ['class' => 'edit-icon', 'id' => 'icon-photo', 'accept' => 'image/*', 'form' => 'profile-form'])}}
                     </label>
                 </div>
             </div>

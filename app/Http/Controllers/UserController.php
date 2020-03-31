@@ -82,14 +82,14 @@ class UserController extends Controller
     }
 
     /**
-     * @param StoreUsers $validated
+     * @param StoreUsers $request
      * @return RedirectResponse
      */
-    public function store(StoreUsers $validated)
+    public function store(StoreUsers $request)
     {
         try {
-            $statement = $validated->all();
-            $this->userService->saveUser($statement);
+            $validated = $request->all();
+            $this->userService->saveUserData($validated);
 
             return redirect()->route('profile');
         } catch (Throwable $e) {

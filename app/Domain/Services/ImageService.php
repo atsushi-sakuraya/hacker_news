@@ -5,6 +5,8 @@ namespace App\Domain\Services;
 
 use App\Domain\Entity\User;
 use App\Domain\Repositories\UserRepository;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Exception;
 use Throwable;
@@ -30,70 +32,49 @@ class ImageService implements ImageServiceInterface
         $this->user = $user;
     }
 
+
     /**
+     * 画像保存、旧画像を削除
+     * @param int $userId
      * @param array $photos
-     * @return array
-     * @throws Exception
+     * @return mixed
      */
-    public function storeImages(array $photos)
+    public function replaceImageFiles(int $userId, array $photos)
     {
-        try {
-            // 画像保存処理
-            if (!empty($photos['header'])) {
-                $this->urls['profile_header_photo'] = $photos['header']->store('img', 'public');
-            }
-
-            if (!empty($photos['icon'])) {
-                $this->urls['profile_icon_photo'] = $photos['icon']->store('img', 'public');
-            }
-
-            if (empty($this->urls)) {
-                throw new Exception('画像をストレージに保存できませんでした。');
-            }
-
-            return $this->urls;
-        } catch (Throwable $e) {
-            throw new Exception($e->getMessage());
+        $urls = [];
+        foreach ($photos as $key => $photo) {
+            $urls[$key] = $this->storeImageFile($photo);
+            $this->deleteOldUserImage($userId, $key);
         }
+        return $urls;
+    }
+
+    /**
+     * @param UploadedFile $photo
+     * @return false|string
+     */
+    public function storeImageFile(UploadedFile $photo)
+    {
+        return $photo->store('img', 'public');
     }
 
     /**
      * ユーザの古い画像を削除
      * @param int $userId
-     * @throws Exception
+     * @param string $column
      */
-    public function deleteOldImages(int $userId)
+    public function deleteOldUserImage(int $userId, string $column)
     {
-        try {
-            $user = $this->user->getUser($userId);
-
-            // 画像保存が成功していたら、古い画像を削除
-            if (!empty($this->urls)) {
-                foreach ($this->urls as $column => $uploadedUrl) {
-                    // 既存画像が存在しない場合はスキップ
-                    if ($user->$column === null) {
-                        continue;
-                    }
-
-                    $this->deleteImageFile($user->$column);
-                }
-            }
-        } catch (Throwable $e) {
-            throw new Exception($e->getMessage());
-        }
+        $url = $this->user->getUser($userId)->get($column);
+        $this->deleteImageFile($url);
     }
 
     /**
      * 画像を削除
-     * @param string $url
-     * @throws Exception
+     * @param Collection $url
      */
-    public function deleteImageFile(string $url)
+    public function deleteImageFile(Collection $url)
     {
-        try {
-            Storage::disk('public')->delete($url);
-        } catch (Throwable $e) {
-            throw new Exception($e->getMessage());
-        }
+        Storage::disk('public')->delete($url);
     }
 }

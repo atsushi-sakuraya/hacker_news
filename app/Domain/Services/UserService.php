@@ -69,49 +69,51 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @param array $statement
+     * ユーザ情報を保存
+     * @param array $request
      * @throws Exception
      */
-    public function saveUser(array $statement)
+    public function saveUserData(array $request)
     {
         // CSRFトークンはDBに保存しないため削除
-        $statement = $this->exceptCsrfToken($statement);
+        $request = $this->exceptCsrfToken($request);
 
         // 画像保存
-        if (!empty($statement['profile_photo'])) {
-            $this->urls = $this->imageService->storeImages($statement['profile_photo']);
-            $this->imageService->deleteOldImages((int) $statement['id']);
+        $urls = [];
+        if (!empty($request['profile_photo'])) {
+            $urls = $this->imageService->replaceImageFiles((int)$request['id'], $request['profile_photo']);
         }
 
-        $this->registerUserTable((int) $statement['id'], $statement);
+        // リクエスト保存
+        $this->registerUserTable($request, $urls);
     }
 
     /**
      * ユーザ情報を保存
-     * @param int $userId
-     * @param array $statement
+     * @param array $request
+     * @param array $urls
      */
-    public function registerUserTable(int $userId, array $statement)
+    public function registerUserTable(array $request, array $urls)
     {
         // 画像保存後のURLを格納
-        if (!empty($this->urls)) {
-            foreach ($this->urls as $column => $url) {
-                $statement[$column] = $url;
+        if (!empty($urls)) {
+            foreach ($urls as $column => $url) {
+                $request[$column] = $url;
             }
         }
-        $this->user->updateOrCreateUser($userId, $statement);
+        $this->user->updateOrCreateUser((int)$request['id'], $request);
     }
 
     /**
      * CSRFトークンを削除
-     * @param array $statement
+     * @param array $request
      * @return array
      */
-    private function exceptCsrfToken(array $statement): array
+    private function exceptCsrfToken(array $request): array
     {
-        if (!empty($statement['_token'])) {
-            unset($statement['_token']);
+        if (!empty($request['_token'])) {
+            unset($request['_token']);
         }
-        return $statement;
+        return $request;
     }
 }
