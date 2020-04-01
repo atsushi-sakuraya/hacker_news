@@ -51,19 +51,6 @@ $(function () {
         }
     });
 
-    // ニュース欄追加
-    var $newsArea = $('.news-lists');
-    var $addNewsBtn = $('button.upload__btn--news');
-    $addNewsBtn.click(function () {
-        console.log('testSakuraya');
-        $newsArea.append(
-            '<li>'
-            + '<input type="url" name="newsUrl[]" class="upload__input--news" placeholder="ニュースURLを入力">'
-            + '<input type="button" name="cancel" class="cancelBtn" value="×">'
-            + '</li>'
-        );
-    });
-
     // プロフィール画像のプレビュー
     var $editPhoto = $('input.edit-photo');
     var $headerPhoto = $('#profile-header-photo');

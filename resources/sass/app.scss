@@ -275,16 +275,16 @@ main {
         .news {
             margin-top: 20px;
 
+            input.upload__input--news {
+                height: 30px;
+                border: $commonBorder;
+                border-radius: 5px;
+                width: 100%;
+            }
+
             &-lists {
                 li {
                     margin-bottom: 5px;
-
-                    input.upload__input--news {
-                        height: 30px;
-                        border: $commonBorder;
-                        border-radius: 5px;
-                        width: 90%;
-                    }
 
                     .cancelBtn {
                         width: 30px;

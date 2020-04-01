@@ -13,13 +13,13 @@ class CreateImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->tinyInteger('type');
-            $table->text('url');
-            $table->timestamps();
-        });
+//        Schema::create('images', function (Blueprint $table) {
+//            $table->bigIncrements('id');
+//            $table->integer('user_id');
+//            $table->tinyInteger('type');
+//            $table->text('url');
+//            $table->timestamps();
+//        });
     }
 
     /**
@@ -29,6 +29,7 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
+        // dockerのDBロールバック用に残す
         Schema::dropIfExists('images');
     }
 }

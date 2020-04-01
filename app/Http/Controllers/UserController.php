@@ -33,7 +33,7 @@ class UserController extends Controller
     protected $auth;
 
     /**
-     * ProfileController constructor.
+     * UserController constructor.
      * @param User $user
      * @param UserService $userService
      */
@@ -88,8 +88,8 @@ class UserController extends Controller
     public function store(StoreUsers $request)
     {
         try {
-            $validated = $request->all();
-            $this->userService->saveUserData($validated);
+            $request = $request->all();
+            $this->userService->saveUserData($request);
 
             return redirect()->route('profile');
         } catch (Throwable $e) {

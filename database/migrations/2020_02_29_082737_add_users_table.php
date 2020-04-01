@@ -17,9 +17,9 @@ class AddUsersTable extends Migration
             $table->text('profile_icon_photo')->nullable()->after('name');
             $table->text('profile_header_photo')->nullable()->after('profile_icon_photo');
             $table->text('self_produce')->nullable()->after('profile_header_photo');
-            $table->unsignedSmallInteger('birth_year')->after('self_produce');
-            $table->unsignedTinyInteger('birth_month')->after('birth_year');
-            $table->unsignedTinyInteger('birth_day')->after('birth_month');
+            $table->unsignedSmallInteger('birth_year')->nullable()->after('self_produce');
+            $table->unsignedTinyInteger('birth_month')->nullable()->after('birth_year');
+            $table->unsignedTinyInteger('birth_day')->nullable()->after('birth_month');
             $table->unsignedInteger('follow')->default(0)->after('birth_day');
             $table->unsignedInteger('follower')->default(0)->after('follow');
         });

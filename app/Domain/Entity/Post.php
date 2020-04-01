@@ -21,7 +21,17 @@ class Post extends Model
     /**
      * @var array
      */
-    protected $fillable = ['userid', 'content', 'article_url'];
+    protected $fillable = [
+        'post_id',
+        'thread_id',
+        'user_id',
+        'comment',
+        'article_url',
+        'image1',
+        'image2',
+        'image3',
+        'image4'
+    ];
 
    /**
      * 投稿IDで検索する

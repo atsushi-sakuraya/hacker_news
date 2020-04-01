@@ -4,9 +4,7 @@ declare(strict_types=1);
 namespace App\Domain\Services;
 
 use App\Domain\Entity\User;
-use Illuminate\Http\UploadedFile;
 use App\Domain\Repositories\UserRepository;
-use App\Domain\Services\ImageService;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
 use Exception;
@@ -71,37 +69,43 @@ class UserService implements UserServiceInterface
     /**
      * ユーザ情報を保存
      * @param array $request
-     * @throws Exception
      */
     public function saveUserData(array $request)
     {
-        // CSRFトークンはDBに保存しないため削除
-        $request = $this->exceptCsrfToken($request);
-
         // 画像保存
-        $urls = [];
         if (!empty($request['profile_photo'])) {
-            $urls = $this->imageService->replaceImageFiles((int)$request['id'], $request['profile_photo']);
+            $storedUrls = $this->updateImageFiles((int)$request['id'], $request['profile_photo']);
+            $request = array_replace($request, $storedUrls);
         }
 
+        // CSRFトークンはDBに保存しないため削除
+        $request = $this->filteringStatement($request);
+
         // リクエスト保存
-        $this->registerUserTable($request, $urls);
+        $this->user->updateOrCreateUser((int)$request['id'], $request);
     }
 
     /**
-     * ユーザ情報を保存
-     * @param array $request
-     * @param array $urls
+     * 画像ファイルを更新する
+     * @param int $userId
+     * @param array $photos
+     * @return array
      */
-    public function registerUserTable(array $request, array $urls)
+    public function updateImageFiles(int $userId, array $photos)
     {
-        // 画像保存後のURLを格納
-        if (!empty($urls)) {
-            foreach ($urls as $column => $url) {
-                $request[$column] = $url;
+        $storedUrls = [];
+        foreach ($photos as $column => $photo) {
+            $storedUrls[$column] = $this->imageService->storeImageFile(
+                $photo,
+                (string)config('const.storage.img.user')
+            );
+
+            $deleteTarget = $this->user->getUser($userId);
+            if (!empty($deleteTarget)) {
+                $this->imageService->deleteImageFile($deleteTarget->$column);
             }
         }
-        $this->user->updateOrCreateUser((int)$request['id'], $request);
+        return $storedUrls;
     }
 
     /**
@@ -109,10 +113,13 @@ class UserService implements UserServiceInterface
      * @param array $request
      * @return array
      */
-    private function exceptCsrfToken(array $request): array
+    private function filteringStatement(array $request): array
     {
         if (!empty($request['_token'])) {
             unset($request['_token']);
+        }
+        if (!empty($request['profile_photo'])) {
+            unset($request['profile_photo']);
         }
         return $request;
     }

@@ -5,7 +5,6 @@ namespace App\Infrastructure\RepositoryImplements;
 
 use App\Domain\Entity\User;
 use App\Domain\Repositories\UserRepository;
-use Illuminate\Support\Facades\Storage;
 
 class UserRepositoryImplement implements UserRepository
 {

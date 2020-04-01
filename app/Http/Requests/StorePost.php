@@ -28,7 +28,7 @@ class StorePost extends FormRequest
         return [
             'user_id' => 'required|numeric',
             'comment' => 'required|alpha_num',
-            'newsUrl.*' => 'nullable|url',
+            'article_url' => 'nullable|url',
             'images.*' => 'nullable|file|image'
         ];
     }

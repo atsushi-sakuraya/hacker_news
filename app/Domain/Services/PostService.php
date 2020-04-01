@@ -3,93 +3,80 @@ declare(strict_types=1);
 
 namespace App\Domain\Services;
 
-use App\Domain\Entity\Image;
+use App\Domain\Repositories\PostRepository;
 use Throwable;
 use Exception;
 
 class PostService implements PostServiceInterface
 {
     /**
-     * @var array
+     * @var ImageService
      */
-    protected $urls;
+    private $imageService;
 
     /**
-     * @var Image
+     * @var PostRepository
      */
-    protected $image;
+    private $post;
 
     /**
      * PostService constructor.
-     * @param Image $image
+     * @param ImageService $imageService
+     * @param PostRepository $post
      */
     public function __construct(
-        Image $image
+        ImageService $imageService,
+        PostRepository $post
     ) {
-        $this->urls = [];
-        $this->image = $image;
+        $this->imageService = $imageService;
+        $this->post = $post;
     }
 
     /**
-     * @param array $imageLists
-     * @param int $userId
-     * @return void
-     * @throws Exception
+     * 投稿情報を保存
+     * @param array $request
      */
-    public function saveImages(array $imageLists, int $userId)
+    public function savePostData(array $request)
     {
-        try {
-            $this->saveImagesOnStorage($imageLists);
-            $this->saveImageUrls($userId);
-        } catch (Throwable $e) {
-            throw new Exception($e->getMessage());
+        if (!empty($request['images'])) {
+            $storedUrls = $this->storeImageFiles($request['images']);
+            $request = array_replace($request, $storedUrls);
         }
+
+        // CSRFトークンはDBに保存しないため削除
+        $request = $this->exceptCsrfToken($request);
+
+        // 投稿データの更新
+        $this->post->create($request);
     }
 
     /**
-     * @param array $imageLists
-     * @return void
-     * @throws Exception
+     * 画像保存
+     * @param array $photos
+     * @return mixed
      */
-    public function saveImagesOnStorage(array $imageLists)
+    public function storeImageFiles(array $photos)
     {
-        try {
-            // 画像をstorage/app/imgに保存
-            if ($imageLists->isNotEmpty()) {
-                foreach ($imageLists as $image) {
-                    // 画像データの保存
-                    $this->urls[] = $image->store('img');
-                }
-            }
-
-            if (empty($this->urls)) {
-                throw new Exception('画像をストレージに保存できませんでした。');
-            }
-        } catch (Throwable $e) {
-            throw new Exception($e->getMessage());
+        $storedUrls = [];
+        foreach ($photos as $i => $photo) {
+            $storedUrls[$i] = $this->imageService->storeImageFile(
+                $photo,
+                (string)config('const.storage.img.post')
+            );
         }
+        return $storedUrls;
     }
 
     /**
-     * @param int $userId
-     * @return void
-     * @throws Exception
+     * CSRFトークンを削除
+     * @param array $request
+     * @return array
      */
-    public function saveImageUrls(int $userId)
+    private function exceptCsrfToken(array $request): array
     {
-        try {
-            // 画像URLの更新
-            $setImages = [];
-            foreach ($this->urls as $url) {
-                $setImages[] = [
-                    'user_id' => $userId,
-                    'type' => config('const.post_type.post'),
-                    'url' => $url,
-                ];
-            }
-            $this->image->insert($setImages);
-        } catch (Throwable $e) {
-            throw new Exception($e->getMessage());
+        if (!empty($request['_token'])) {
+            unset($request['_token']);
         }
+        return $request;
     }
 }

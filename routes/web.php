@@ -16,9 +16,11 @@ Route::get('/', function () {
 });
 Route::get('/post', 'PostController@index');
 Route::post('/post', 'PostController@post');
+
 Route::get('/profile', 'UserController@index')->name('profile');
 Route::get('/profile/edit', 'UserController@edit');
 Route::post('/profile/store', 'UserController@store');
+
 Route::get('/article', function () {
     return view('article');
 });
