@@ -14,7 +14,11 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // ログイン情報を取得
+        $this->middleware(function ($request, $next) {
+            $this->auth = Auth::user();
+            return $next($request);
+        });
     }
 
     /**
@@ -24,6 +28,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = $this->userService->getUser($this->auth->id);
+        return view('index',
+            compact('user')
+        )->with('auth', $this->auth);
     }
 }

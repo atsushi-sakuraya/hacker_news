@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -27,22 +26,17 @@ class Post extends Model
         'user_id',
         'comment',
         'article_url',
+        'image0',
         'image1',
         'image2',
-        'image3',
-        'image4'
+        'image3'
     ];
 
-   /**
-     * 投稿IDで検索する
-     *
-     * @param int $postId
-     * @return Collection
+    /**
+     * 投稿のユーザ情報を取得
      */
-    public function getById(int $postId)
+    public function user()
     {
-        return $this->where('id', $postId)
-          ->get();
+        return $this->belongsTo('App\Domain\Entity\User');
     }
-
 }

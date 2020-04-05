@@ -5,6 +5,7 @@ namespace App\Infrastructure\RepositoryImplements;
 
 use App\Domain\Entity\Post;
 use App\Domain\Repositories\PostRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class PostRepositoryImplement implements PostRepository
 {
@@ -23,12 +24,20 @@ class PostRepositoryImplement implements PostRepository
     }
 
     /**
-     * @param int $postId
-     * @return Post
+     * @return \Illuminate\Support\Collection
      */
-    public function getPost(int $postId)
+    public function getPosts()
     {
-        return $this->post->find($postId);
+        return $this->post->limit(10)->get();
+    }
+
+    /**
+     * @param int $userId
+     * @return Post[]|Collection
+     */
+    public function getUserPosts(int $userId)
+    {
+        return $this->post->where('user_id', $userId)->get();
     }
 
     /**

@@ -12,14 +12,14 @@
 @else
     <div id="drawer-header" class="drawer-section">
         <div id="drawer-header-wrapper">
-            <div class="profile-img" style="background-image: url({{ asset('/img/profile03.jpg') }});"></div>
+            <div class="profile-img" style="background-image: url('{{ $user->profile_icon_photo }}');"></div>
             <div class="profile-name">
-                <div class="profile-kana">{{ Auth::user()->name }}</div>
+                <div class="profile-kana">{{ $user->name }}</div>
                 <div class="account-id">@sakkun_as</div>
             </div>
             <div class="friends">
-                <div class="follows"><span class="bold">160</span> フォロー</div>
-                <div class="followers"><span class="bold">129</span> フォロワー</div>
+                <div class="follows"><span class="bold">{{ $user->follow }}</span> フォロー</div>
+                <div class="followers"><span class="bold">{{ $user->follower }}</span> フォロワー</div>
             </div>
         </div>
     </div>

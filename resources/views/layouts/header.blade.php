@@ -4,7 +4,7 @@
         <div class="logo"><a href="/">Hacker's News</a></div>
         <div id="drawer">
             <input type="checkbox" id="drawer-input" class="drawer-hidden">
-            <label for="drawer-input" id="drawer-icon" style="background-image: url({{ asset('/img/profile03.jpg') }});"></label>
+            <label for="drawer-input" id="drawer-icon" style="background-image: url('{{ $user->profile_icon_photo }}');"></label>
             <label for="drawer-input" id="drawer-bg" class="drawer-hidden"></label>
             <div id="drawer-contents">@include('layouts.drawer')</div>
         </div>

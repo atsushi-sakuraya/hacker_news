@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use App\Domain\Services\UserService;
+use App\Domain\Services\PostService;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 use Exception;
@@ -20,29 +21,37 @@ class UserController extends Controller
     /**
      * @var User
      */
-    protected $user;
+    private $user;
 
     /**
      * @var UserService
      */
-    protected $userService;
+    private $userService;
+
+    /**
+     * @var PostService
+     */
+    private $postService;
 
     /**
      * @var Authenticatable|null
      */
-    protected $auth;
+    private $auth;
 
     /**
      * UserController constructor.
      * @param User $user
      * @param UserService $userService
+     * @param PostService $postService
      */
     public function __construct(
         User $user,
-        UserService $userService
+        UserService $userService,
+        PostService $postService
     ) {
         $this->user = $user;
         $this->userService = $userService;
+        $this->postService = $postService;
 
         // ログイン情報を取得
         $this->middleware(function ($request, $next) {
@@ -60,6 +69,20 @@ class UserController extends Controller
      * @return View|RedirectResponse
      */
     public function index()
+    {
+        $user = $this->userService->getUser($this->auth->id);
+        $posts = $this->postService->getPosts();
+
+        return view(
+            'index',
+            compact('user', 'posts')
+        )->with('auth', $this->auth);
+    }
+
+    /**
+     * @return View|RedirectResponse
+     */
+    public function detail()
     {
         $user = $this->userService->getUser($this->auth->id);
 

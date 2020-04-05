@@ -101,7 +101,7 @@ class UserService implements UserServiceInterface
             );
 
             $deleteTarget = $this->user->getUser($userId);
-            if (!empty($deleteTarget)) {
+            if (!empty($deleteTarget->$column)) {
                 $this->imageService->deleteImageFile($deleteTarget->$column);
             }
         }

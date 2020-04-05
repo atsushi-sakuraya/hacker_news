@@ -8,10 +8,15 @@ use App\Domain\Entity\Post;
 interface PostRepository
 {
     /**
-     * @param int $postId
+     * @return \Illuminate\Support\Collection
+     */
+    public function getPosts();
+
+    /**
+     * @param int $userId
      * @return Post
      */
-    public function getPost(int $postId);
+    public function getUserPosts(int $userId);
 
     /**
      * @param array $statement

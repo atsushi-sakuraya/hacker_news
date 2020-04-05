@@ -4,8 +4,7 @@ declare(strict_types=1);
 namespace App\Domain\Services;
 
 use App\Domain\Repositories\PostRepository;
-use Throwable;
-use Exception;
+use Illuminate\Support\Collection;
 
 class PostService implements PostServiceInterface
 {
@@ -59,12 +58,32 @@ class PostService implements PostServiceInterface
     {
         $storedUrls = [];
         foreach ($photos as $i => $photo) {
-            $storedUrls[$i] = $this->imageService->storeImageFile(
+            $storedUrls['image' . $i] = $this->imageService->storeImageFile(
                 $photo,
                 (string)config('const.storage.img.post')
             );
         }
         return $storedUrls;
+    }
+
+    /**
+     * 投稿情報を取得
+     * @return Collection
+     */
+    public function getPosts()
+    {
+        $posts = $this->post->getPosts();
+        return $this->setTimeDifference($posts);
+    }
+
+    /**
+     * ユーザの投稿情報を取得
+     * @param int $userId
+     * @return \App\Domain\Entity\Post
+     */
+    public function getUserPosts(int $userId)
+    {
+        return $this->post->getUserPosts($userId);
     }
 
     /**
@@ -78,5 +97,35 @@ class PostService implements PostServiceInterface
             unset($request['_token']);
         }
         return $request;
+    }
+
+    /**
+     * 現在日時との差分を出力
+     * @param Collection $posts
+     * @return Collection
+     */
+    private function setTimeDifference(Collection $posts)
+    {
+        $now = now();
+        $posts = $posts->map(function ($post) use ($now) {
+            if ($diff = $now->diffInYears($post->created_at)) {
+                $post->time_difference = $diff . '年前';
+            } elseif ($diff = $now->diffInMonths($post->created_at)) {
+                $post->time_difference = $diff . '月前';
+            } elseif ($diff = $now->diffInDays($post->created_at)) {
+                $post->time_difference = $diff . '日前';
+            } elseif ($diff = $now->diffInHours($post->created_at)) {
+                $post->time_difference = $diff . '時間前';
+            } elseif ($diff = $now->diffInMinutes($post->created_at)) {
+                $post->time_difference = $diff . '分前';
+            } elseif ($diff = $now->diffInSeconds($post->created_at)) {
+                $post->time_difference = $diff . '秒前';
+            } else {
+                $post->time_difference = 'ただ今';
+            }
+            return $post;
+        });
+
+        return $posts;
     }
 }

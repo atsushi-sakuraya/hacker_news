@@ -54,4 +54,12 @@ class User extends Authenticatable
         'follow' => 'integer',
         'follower' => 'integer',
     ];
+
+    /**
+     * ユーザの投稿情報を取得
+     */
+    public function posts()
+    {
+        return $this->hasMany('App\Domain\Entity\Post');
+    }
 }
