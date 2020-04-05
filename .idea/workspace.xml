@@ -5,10 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2a26e48-2d76-418d-a485-aa4b9e373f27" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.circleci/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.circleci/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Domain/Entity/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Domain/Entity/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Domain/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Domain/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Domain/Repositories/PostRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Domain/Repositories/PostRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Domain/Services/PostService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Domain/Services/PostService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Domain/Services/UserService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Domain/Services/UserService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Infrastructure/RepositoryImplements/PostRepositoryImplement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Infrastructure/RepositoryImplements/PostRepositoryImplement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/drawer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/drawer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/postlists.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/postlists.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +169,11 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
   </component>
-  <component name="RunManager" selected="PHPUnit.UserRepositoryTest.testGetUser">
+  <component name="RunManager" selected="PHPUnit.PostServiceTest.testSaveImagesOnStorage">
+    <configuration name="PostServiceTest.testSaveImagesOnStorage" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\Domain\Services\PostServiceTest" configuration_file="/var/www/hacker_news/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/Domain/Services/PostServiceTest.php" method="testSaveImagesOnStorage" scope="Method" />
+      <method v="2" />
+    </configuration>
     <configuration name="UserRepositoryTest.testGetUser" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Domain\Repository\UserRepositoryTest" configuration_file="/var/www/hacker_news/phpunit.xml" file="$PROJECT_DIR$/tests/Domain/Repository/UserRepositoryTest.php" method="testGetUser" scope="Method" />
       <method v="2" />
@@ -182,6 +196,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.PostServiceTest.testSaveImagesOnStorage" />
         <item itemvalue="PHPUnit.UserRepositoryTest.testGetUser" />
         <item itemvalue="PHPUnit.UserServiceTest" />
         <item itemvalue="PHPUnit.UserServiceTest.testGetUser" />
@@ -228,7 +243,9 @@
       <workItem from="1584176508271" duration="5234000" />
       <workItem from="1584701299081" duration="3236000" />
       <workItem from="1584767848772" duration="9552000" />
-      <workItem from="1584874033259" duration="1003000" />
+      <workItem from="1584874033259" duration="2059000" />
+      <workItem from="1585633689103" duration="32843000" />
+      <workItem from="1586061249851" duration="12172000" />
     </task>
     <servers />
   </component>
@@ -280,10 +297,10 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="328" y="143" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1280.800@0.0.1280.800" timestamp="1584176447139" />
-    <state x="378" y="162" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1584774096157">
+    <state x="378" y="162" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1586061389229">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="378" y="162" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.800@0.0.1280.800" timestamp="1584774096157" />
+    <state x="378" y="162" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.800@0.0.1280.800" timestamp="1586061389229" />
     <state x="385" y="269" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1583072681117">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
@@ -296,26 +313,42 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="176" y="185" key="EditFileWatcherDialog/0.0.1280.800@0.0.1280.800" timestamp="1582524129972" />
-    <state width="1238" height="267" key="GridCell.Tab.0.bottom" timestamp="1584811948389">
+    <state width="1238" height="263" key="GridCell.Tab.0.bottom" timestamp="1585750729650">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="267" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1584811948389" />
+    <state width="1238" height="263" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1585750729650" />
     <state width="1238" height="308" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1584012715093" />
-    <state width="1238" height="267" key="GridCell.Tab.0.center" timestamp="1584811948388">
+    <state width="1238" height="263" key="GridCell.Tab.0.center" timestamp="1585750729649">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="267" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1584811948388" />
+    <state width="1238" height="263" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1585750729649" />
     <state width="1238" height="308" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1584012715091" />
-    <state width="1238" height="267" key="GridCell.Tab.0.left" timestamp="1584811948387">
+    <state width="1238" height="263" key="GridCell.Tab.0.left" timestamp="1585750729648">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="267" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1584811948387" />
+    <state width="1238" height="263" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1585750729648" />
     <state width="1238" height="308" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1584012715090" />
-    <state width="1238" height="267" key="GridCell.Tab.0.right" timestamp="1584811948388">
+    <state width="1238" height="263" key="GridCell.Tab.0.right" timestamp="1585750729649">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="267" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1584811948388" />
+    <state width="1238" height="263" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1585750729649" />
     <state width="1238" height="308" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1584012715092" />
+    <state width="1238" height="263" key="GridCell.Tab.1.bottom" timestamp="1585750729652">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="263" key="GridCell.Tab.1.bottom/0.0.1280.800@0.0.1280.800" timestamp="1585750729652" />
+    <state width="1238" height="263" key="GridCell.Tab.1.center" timestamp="1585750729651">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="263" key="GridCell.Tab.1.center/0.0.1280.800@0.0.1280.800" timestamp="1585750729651" />
+    <state width="1238" height="263" key="GridCell.Tab.1.left" timestamp="1585750729650">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="263" key="GridCell.Tab.1.left/0.0.1280.800@0.0.1280.800" timestamp="1585750729650" />
+    <state width="1238" height="263" key="GridCell.Tab.1.right" timestamp="1585750729652">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="263" key="GridCell.Tab.1.right/0.0.1280.800@0.0.1280.800" timestamp="1585750729652" />
     <state x="315" y="223" key="NewPhpClassDialog" timestamp="1583071957688">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
@@ -324,24 +357,28 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="686" y="221" width="577" height="375" key="PHPComposerAddDependencyDialogDimensionKey/0.0.1280.800@0.0.1280.800" timestamp="1581428900005" />
-    <state x="64" y="41" width="1063" height="722" key="SettingsEditor" timestamp="1584778099546">
+    <state x="64" y="41" width="1063" height="722" key="SettingsEditor" timestamp="1585743627196">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="64" y="41" width="1063" height="722" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1584778099546" />
+    <state x="64" y="41" width="1063" height="722" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1585743627196" />
     <state x="64" y="41" key="SettingsEditor/0.23.1280.777@0.23.1280.777" timestamp="1584175267602" />
-    <state x="317" y="244" key="com.intellij.ide.util.TipDialog" timestamp="1584874035695">
+    <state x="317" y="244" key="com.intellij.ide.util.TipDialog" timestamp="1586061276913">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="317" y="244" key="com.intellij.ide.util.TipDialog/0.0.1280.800@0.0.1280.800" timestamp="1584874035695" />
+    <state x="317" y="244" key="com.intellij.ide.util.TipDialog/0.0.1280.800@0.0.1280.800" timestamp="1586061276913" />
     <state x="317" y="244" key="com.intellij.ide.util.TipDialog/0.23.1280.777@0.23.1280.777" timestamp="1581424630985" />
+    <state x="423" y="324" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585675421100">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="423" y="324" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1280.777@0.23.1280.777" timestamp="1585675421100" />
     <state x="420" y="128" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration" timestamp="1581432463424">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="420" y="128" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration/0.0.1280.800@0.0.1280.800" timestamp="1581432463424" />
-    <state x="262" y="35" width="756" height="729" key="find.popup" timestamp="1584888901546">
+    <state x="262" y="35" width="756" height="729" key="find.popup" timestamp="1586078595004">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="262" y="35" width="756" height="729" key="find.popup/0.0.1280.800@0.0.1280.800" timestamp="1584888901546" />
+    <state x="262" y="35" width="756" height="729" key="find.popup/0.0.1280.800@0.0.1280.800" timestamp="1586078595004" />
     <state x="536" y="137" key="ftp.server.browser" timestamp="1584271781250">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
@@ -354,9 +391,9 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="402" y="28" key="refactoring.ChangeSignatureDialog/0.0.1280.800@0.0.1280.800" timestamp="1584012615124" />
-    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1583840446785">
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1585744444327">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1583840446785" />
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1585744444327" />
   </component>
 </project>
